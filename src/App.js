@@ -1,6 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
-import { tab } from '@testing-library/user-event/dist/tab';
+import { useState, useRef } from 'react';
 
 function App() {
 
@@ -287,18 +286,29 @@ const [winner, setWinner] = useState(false)
     else setWinner(false)
   }
 
+
+  const height = useRef(window.innerHeight).current
+  const width = useRef(window.innerWidth).current
+  const horizontal = width > height
+  //bunlari degistirdiginde tepkili yap
+
+  if(width<=height) var size = width/8
+  else var size = height/8
+  console.log(size*8)
+
+
   function Block(props){
     return (
-    <div className={"w-[12.5vh] h-[12.5vh] bg-" + props.color} pos={props.pos}  onClick={() => {blockClick(props.pos, props.piece)}} >
-      {props.mark === 'ball' ? <img className='absolute w-[12.5vh] h-[12.5vh]' src='imgs/ball.svg' alt='ball-marker' /> : <></> }
-      {props.mark === 'red-ball' ? <img className='absolute w-[12.5vh] h-[12.5vh]' src='imgs/red-ball.svg' alt='ball-marker' /> : <></> }
-      <img src={"/imgs/" + props.piece + (props.piece !== 'empty' ? ".svg" : ".png")} className='w-[12.5vh] h-[12.5vh]' alt="block" />
+    <div className={'w-[' +size+ 'px] h-[' +size+ 'px] bg-' + props.color} pos={props.pos}  onClick={() => {blockClick(props.pos, props.piece)}} >
+      {props.mark === 'ball' ? <img className={'absolute z-30 w-[' +size+ 'px] h-[' +size+ 'px]'} src='imgs/ball.svg' alt='ball-marker' /> : <></> }
+      {props.mark === 'red-ball' ? <img className={'z-30 absolute w-[' +size+ 'px] h-[' +size+ 'px]'} src='imgs/red-ball.svg' alt='ball-marker' /> : <></> }
+      <img src={"/imgs/" + props.piece + (props.piece !== 'empty' ? ".svg" : ".png")} className={'z-10 absolute w-[' +size+ 'px] h-[' +size+ 'px]'} alt="block" />
     </div>
     )
   }
   return (
-    <div className="flex">
-      <div className='w-[calc(100vw-100vh)]'>
+    <div className={'flex ' + (!horizontal && ' flex-col')}>
+      <div className={horizontal ? 'w-[calc((100vw-100vh)/2)] min-w-[50px]':'h-[calc((100vh-100vw)/2)] min-h-[25px]'}>
         {winner==='white' && <>white won<br /></>}{winner==='black' && <>black won<br /></>}
         {winner===false &&
           <>
@@ -309,10 +319,10 @@ const [winner, setWinner] = useState(false)
         
         
       </div>
-      <div id='table' className='flex w-[100vh] h-[100vh] bg-white'>
+      <div id='table'>
         {tableJsx}
       </div>
-      <div className='w-[calc(100vw-100vh)]'></div>
+      <div className={horizontal && ''}></div>
     </div>
   );
 }
