@@ -328,3 +328,6 @@ const [winner, setWinner] = useState(false)
 }
 
 export default App;
+
+
+// degdiginde kalkmis olsun brakildiginda hangi blockun ustundeyse oraya gecsin
