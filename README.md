@@ -1,2 +1,2 @@
 # MBYchess
- chess app(2 player2)
+ chess app(2 player)
