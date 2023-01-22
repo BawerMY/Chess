@@ -1,3 +1,3 @@
 # MBYchess
-https://mby-social.netlify.app/
+https://mby-chess.netlify.app/
  chess app(2 player)
