@@ -1,3 +1,3 @@
 # MBYchess
-https://mby-chess.netlify.app/
- chess app(2 player)
+https://bawermy.github.io/Chess
+chess app(2 player)
